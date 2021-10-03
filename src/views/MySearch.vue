@@ -31,9 +31,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.search {
-  margin-top: -1rem;
-}
 .search-button {
   width: 1rem;
   border-radius: 2px;

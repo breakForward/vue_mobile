@@ -1,11 +1,17 @@
 <template>
-  <div class="article-item">
+  <div class="article-item" @click="viewDetails">
     <img :src="articleObj.picurl" alt="">
     <div class="item">
       <h3 class="title">{{ articleObj.title }}</h3>
       <p class="time-watch">
-        <span class="time">{{ Moment }}</span>
-        <span class="watch">{{ Hits }}</span>
+        <span class="time">
+          <van-icon name="clock-o" />
+          {{ Moment }}
+        </span>
+        <span class="watch">
+          <van-icon name="eye-o" />
+          {{ Hits }}
+        </span>
       </p>
     </div>
   </div>
@@ -22,6 +28,18 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  methods: {
+    viewDetails() {
+      this.$router.push({
+        path: '/detail', 
+        query: {
+          id: this.articleObj.id,
+          cid: this.articleObj.classid,
+          type: 'list'
+        }
+      })
     }
   },
   computed: {

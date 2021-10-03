@@ -24,7 +24,6 @@ export default {
   async created() {
     const { data } = await this.$axios.get('/getArticle.php')
     this.articleArr = data
-    console.log(data);
   }
 }
 </script>

@@ -1,9 +1,10 @@
 <template>
   <div class="banner-list">
-    <ListContent v-for="item in bannerArr" :key="item.id">
-      <img slot="img" :src="item.picurl" alt="">
-      <p slot="content">{{ item.title }}</p>
-    </ListContent>
+    <ListContent 
+      v-for="item in bannerArr" 
+      :key="item.id"
+      :bannerObj="item"
+    />
   </div>
 </template>
 

@@ -1,13 +1,33 @@
 <template>
-  <div class="list-content">
-    <slot name="img"></slot>
-    <slot name="content"></slot>
+  <div class="list-content" @click="viewDetails">
+    <img :src="bannerObj.picurl" alt="">
+    <p>{{ bannerObj.title }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ListContent',
+  props: {
+    bannerObj: { 
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
+  methods: {
+    viewDetails() {
+      this.$router.push({
+        path: '/detail', 
+        query: {
+          id: this.bannerObj.id,
+          cid: this.bannerObj.classid,
+          type: 'img'
+        }
+      })
+    }
+  }
 }
 </script>
 

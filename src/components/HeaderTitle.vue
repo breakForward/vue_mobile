@@ -1,7 +1,9 @@
 <template>
   <div class="header">
+    <h2>
       <van-icon @click="routerGo" class="goback" name="arrow-left" size=".5rem" color="#fff" />
-      <h2>{{ title }}</h2>
+      <span>{{ title }}</span>
+    </h2>
   </div>
 </template>
 
@@ -24,13 +26,18 @@ export default {
 
 <style lang="less" scoped>
 .header {
-  position: relative;
-  padding: .1rem .3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 1rem;
+  z-index: 2;
   border-bottom: 1px solid #ccc;
   background-color: #31c27c;
   h2 {
+    position: relative;
+    padding: .1rem .3rem;
+    height: 100%;
     text-align: center;
     font-size: .4rem;
     color: #fff;
