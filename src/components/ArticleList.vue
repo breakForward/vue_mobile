@@ -11,6 +11,8 @@
 <script>
 import ArticleItem from './ArticleItem.vue'
 
+import { getArticle } from '@/api/myAxios'
+
 export default {
   name: 'ArticleList',
   data() {
@@ -22,7 +24,7 @@ export default {
     ArticleItem
   },
   async created() {
-    const { data } = await this.$axios.get('/getArticle.php')
+    const { data } = await getArticle('/getArticle.php')
     this.articleArr = data
   }
 }

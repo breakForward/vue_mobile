@@ -10,7 +10,7 @@
     </p>
     <div class="content" v-html="detailItem.content"></div>
     <div class="detaInfo">
-      <p>分类：{{ detailItem.kuhangye }}</p>
+      <p>分类：{{ $route.query.type === 'img' ? '酷炫站' : '文章干货' }}</p>
       <p>阅读量：{{ detailItem.hits }}</p>
       <p>发布时间：{{ Moment }}</p>
     </div>
@@ -19,7 +19,9 @@
 
 <script>
 import moment from 'moment'
-import HeaderTitle from './HeaderTitle.vue';
+import HeaderTitle from './HeaderTitle.vue'
+
+import { getDetail } from '@/api/myAxios'
 
 export default {
   name: 'DetailPage',
@@ -41,9 +43,7 @@ export default {
   async created() {
     const { id, cid, type } = this.$route.query
     // 获取详情数据
-    const { data } = await this.$axios.get('/getDetail.php', { 
-      params: { id, cid, type } 
-    })
+    const { data } = await getDetail('/getDetail.php', { id, cid, type })
     this.detailItem = data
   }
 }
@@ -51,7 +51,9 @@ export default {
 
 <style lang="less" scoped>
 .detail-page {
-  padding-bottom: .5rem;
+  position: relative;
+  z-index: 3;
+  background-color: #fff;
   .detail-top{
     display: flex;
     padding: .2rem;
@@ -67,13 +69,15 @@ export default {
   .description {
     padding: .2rem;
     font-size: .28rem;
-    line-height: .4rem;
+    line-height: .45rem;
     color: #999;
     text-align: justify;
     border-bottom: 1px solid #e8e8e8;
   }
   .content {
     padding: .2rem;
+    font-size: .32rem;
+    overflow-x: auto;
     border-bottom: 1px solid #e8e8e8;
   }
   .detaInfo {
@@ -82,8 +86,5 @@ export default {
     color: #999;
     line-height: .5rem;
   }
-}
-::v-deep .van-tabbar {
-  display: none;
 }
 </style>

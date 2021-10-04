@@ -13,17 +13,16 @@ import ListContent from './ListContent.vue'
 
 export default {
   name: 'Bannerlist',
-  data() {
-    return {
-      bannerArr: []
+  props: {
+    bannerArr: { 
+      type: Array, 
+      default() {
+       return []
+      }
     }
   },
   components: {
     ListContent
-  },
-  async created() {
-    const { data } = await this.$axios.get('/getRecom.php', { params: { num: 10 } })
-    this.bannerArr = data
   }
 }
 </script>

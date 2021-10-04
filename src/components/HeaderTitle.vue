@@ -36,12 +36,15 @@ export default {
   background-color: #31c27c;
   h2 {
     position: relative;
-    padding: .1rem .3rem;
+    padding: .1rem .7rem .1rem 1rem;
     height: 100%;
     text-align: center;
     font-size: .4rem;
     color: #fff;
     line-height: .8rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .goback {
     position: absolute;

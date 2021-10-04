@@ -1,10 +1,10 @@
 <template>
   <div class="tab-bar">
-    <van-tabbar v-model="active" active-color="#31c27c" inactive-color="#000" :border="true">
-      <van-tabbar-item icon="wap-home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="apps-o">分类</van-tabbar-item>
-      <van-tabbar-item icon="diamond-o">灵感</van-tabbar-item>
-      <van-tabbar-item icon="label-o">文章</van-tabbar-item>
+    <van-tabbar route active-color="#31c27c" inactive-color="#000" :border="true">
+      <van-tabbar-item replace to="/" icon="wap-home-o">首页</van-tabbar-item>
+      <van-tabbar-item replace to="/classify" icon="apps-o">分类</van-tabbar-item>
+      <van-tabbar-item replace to="/3" icon="diamond-o">灵感</van-tabbar-item>
+      <van-tabbar-item replace to="/4" icon="label-o">文章</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
