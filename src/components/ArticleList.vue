@@ -11,28 +11,24 @@
 <script>
 import ArticleItem from './ArticleItem.vue'
 
-import { getArticle } from '@/api/myAxios'
-
 export default {
   name: 'ArticleList',
-  data() {
-    return {
-      articleArr: []
+  props: {
+    articleArr: {
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
   components: {
     ArticleItem
-  },
-  async created() {
-    const { data } = await getArticle('/getArticle.php')
-    this.articleArr = data
   }
 }
 </script>
 
 <style lang="less" scoped>
 .article-list {
-  margin-top: .2rem;
   padding: .2rem .15rem;
   background-color: #fff;
 }

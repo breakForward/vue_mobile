@@ -1,28 +1,29 @@
 <template>
-  <van-pull-refresh v-model="refreshing" @refresh="onRefresh" class="list">
+  <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
     <van-list
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <BannerList :bannerArr="bannerArr" />
+      <slot :listArr="listArr"></slot>
     </van-list>
   </van-pull-refresh>
 </template>
 
 <script>
-import BannerList from '@/components/BannerList.vue'
-
-import { getInfoClass, getBanner } from '@/api/myAxios'
+import { getInfoClass, getBanner, getArticle } from '@/api/myAxios'
 
 export default {
   name: "List",
+  props: {
+    myType: { type: String, default: '' }
+  },
   data() {
     return {
       cid: '',
       page: 0,
-      bannerArr: [],
+      listArr: [],
       // 是否处于上拉加载状态，加载过程中不触发load事件
       loading: false,
       // 是否已加载完成，加载完成后不再触发load事件
@@ -32,30 +33,44 @@ export default {
     }
   },
   components: {
-    BannerList
+    // BannerList
   },
   methods: {
     async onLoad() {
       if (this.refreshing) {
-        this.bannerArr = []
+        this.listArr = []
         this.refreshing = false
       }
+      if(this.page === 0) {
+        this.listArr = []
+      }
+       // 页数加一
       this.page++
-      if(!this.cid) {
+      if(!this.cid && (this.myType === '分类')) {
         // 获取分类导航数据
         const { data } = await getInfoClass('/infoClass.php')
         this.cid = data[0].id
       }
-      // 获取推荐数据
-      const { data } = await getBanner('/getList.php', { page: this.page, cid: this.cid })
-      this.bannerArr = [...this.bannerArr, ...data]
+      let data = []
+      if(this.myType === '灵感') {
+        // 获取灵感数据
+        const item = await getBanner('/getList.php', { page: this.page })
+        data = item.data
+      } else if(this.myType === '分类') {
+        // 获取分类数据
+        const item = await getBanner('/getList.php', { page: this.page, cid: this.cid })
+        data = item.data
+      } else if(this.myType === '文章') {
+        // 获取文章数据
+        const item = await getArticle('/getArticle.php', { page: this.page })
+        data = item.data
+      }
+      this.listArr = [...this.listArr, ...data]
       // 加载完成
       this.loading = false
       // 如果返回的数据为空，则表示数据已加载全部
       if (data.length === 0) {
         this.finished = true
-        // 页数重置为 0
-        this.page = 0
       }
     },
     onRefresh() {
@@ -72,4 +87,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+::v-deep .van-list__finished-text {
+  font-size: .3rem;
+  line-height: 1rem;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="list-content" @click="viewDetails">
-    <img :src="bannerObj.picurl" alt="">
+    <img :src="bannerObj.picurl" alt="" v-lazy="bannerObj.picurl">
     <p>{{ bannerObj.title }}</p>
   </div>
 </template>

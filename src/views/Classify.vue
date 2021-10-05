@@ -7,7 +7,11 @@
       </van-sidebar>
     </div>
     <div class="right-list">
-      <List ref="list" />
+      <List ref="list" myType="分类">
+        <template v-slot:default="slotProps">
+          <BannerList :bannerArr="slotProps.listArr" />
+        </template>
+      </List>
     </div>
   </div>
 </template>
@@ -15,8 +19,9 @@
 <script>
 import Header from "@/components/Header.vue"
 import List from '@/components/List.vue'
+import BannerList from '@/components/BannerList.vue'
 
-import { getInfoClass, getBanner } from '@/api/myAxios'
+import { getInfoClass } from '@/api/myAxios'
 
 export default {
   name: "Classify",
@@ -28,15 +33,14 @@ export default {
   },
   components: {
     Header,
-    List
+    List,
+    BannerList
   },
   methods: {
     setActiveKey(index) {
       this.activeKey = index
       // 分类 ID
       this.$refs.list.cid = this.navArr[index].id
-      // 列表清空
-      this.$refs.list.bannerArr = []
       // 页数重置
       this.$refs.list.page = 0
       this.$refs.list.finished = false

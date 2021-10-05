@@ -1,6 +1,6 @@
 <template>
   <div class="article-item" @click="viewDetails">
-    <img :src="articleObj.picurl" alt="">
+    <img :src="articleObj.picurl" alt="" v-lazy="articleObj.picurl">
     <div class="item">
       <h3 class="title">{{ articleObj.title }}</h3>
       <p class="time-watch">
@@ -65,6 +65,7 @@ export default {
   height: 1.6rem;
   border: 1px solid #e8e8e8;
   img {
+    width: 2.5rem;
     height: 100%;
   }
   .item {
@@ -74,7 +75,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: .1rem .15rem;
-    overflow: hidden;
+    overflow:hidden;
     .title {
       font-size: .28rem;
       font-weight: 700;

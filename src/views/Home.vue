@@ -4,7 +4,7 @@
     <Scroll>
       <Swiper :swiperArr="swiperArr" />
       <BannerList :bannerArr="bannerArr" />
-      <ArticleList />
+      <ArticleList :articleArr="articleArr" />
     </Scroll>
   </div>
 </template>
@@ -16,14 +16,15 @@ import Scroll from '@/components/Scroll.vue'
 import ArticleList from '@/components/ArticleList.vue'
 import Swiper from '@/components/Swiper.vue'
 
-import { getBanner } from '@/api/myAxios'
+import { getBanner, getArticle } from '@/api/myAxios'
 
 export default {
   name: 'Home',
   data() {
     return {
       swiperArr: [],
-      bannerArr: []
+      bannerArr: [],
+      articleArr: []
     }
   },
   components: {
@@ -40,6 +41,9 @@ export default {
     // 获取推荐数据
     const item2 = await getBanner('/getList.php', { num: 10 })
     this.bannerArr = item2.data
+    // 获取文章数据
+    const item3 = await getArticle('/getArticle.php')
+    this.articleArr = item3.data
   }
 }
 </script>
