@@ -13,38 +13,49 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { title: '首页' }
   },
   {
     path: '/classify',
     name: 'Classify',
-    component: Classify
+    component: Classify,
+    meta: { title: '分类' }
   },
   {
     path: '/inspiration',
     name: 'Inspiration',
-    component: Inspiration
+    component: Inspiration,
+    meta: { title: '灵感' }
   },
   {
     path: '/article',
     name: 'Article',
-    component: Article
+    component: Article,
+    meta: { title: '文章' }
   },
   {
     path: '/search',
     name: 'MySearch',
-    component: MySearch
+    component: MySearch,
+    meta: { title: '搜索' }
   },
   {
     path: '/detail',
     name: 'DetailPage',
-    component: DetailPage
+    component: DetailPage,
+    meta: { title: '详情' }
   }
 ]
 
 const router = new VueRouter({
   routes,
   mode: 'history'
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
 })
 
 export default router
