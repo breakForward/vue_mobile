@@ -1,24 +1,23 @@
-# mobile
+### 介绍
+基于vue2.x + vue-cli + vue-router + axios + vant 实现的移动端项目。
 
-## Project setup
+### 项目预览
+[http://175.178.187.24/](http://175.178.187.24/)
+
+### 使用说明
 ```
+# 项目克隆
+git clone https://gitee.com/black-tiger-ah-fu/youth-gang.git
+
+# 进入项目
+cd mobile
+
+# 安装依赖
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+# 运行项目
 npm run serve
-```
 
-### Compiles and minifies for production
-```
+# 打包发布
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
